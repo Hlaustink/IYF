@@ -318,6 +318,21 @@
             closeLoginModal();
         }
     };
+// Function to show notification
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'notification show';
+    notification.innerText = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => document.body.removeChild(notification), 300);
+    }, 3000);
+}
+
+// Example usage
+showNotification('Welcome to SpecterRoss!');
 
     // Toggle visibility of vision and mission text
     function toggleVisionText() {
