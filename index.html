@@ -156,6 +156,39 @@
         .notification.show {
             display: block;
         }
+        /* Container for the combined bar */
+.bar-container {
+    margin: 20px 0;
+}
+
+/* Individual bars */
+.bar {
+    position: relative;
+    height: 30px;
+    margin-bottom: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+/* Progress inside the bar */
+.bar-progress {
+    height: 100%;
+    background-color: #4CAF50;
+    width: 0; /* Initial width for animation */
+    border-radius: 5px;
+    transition: width 2s ease-in-out;
+}
+
+/* Label on top of the bars */
+.bar-label {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: #333;
+}
+
     </style>
 </head>
 <body>
@@ -207,15 +240,39 @@
         <button class="close-btn" onclick="closeLoginModal()">Close</button>
     </div>
 </div>
+<div class="container bars my-5">
+    <h2 class="text-center mb-4">Our Achievements and Services</h2>
+    <div class="bar-container">
+        <!-- Satisfaction Bar -->
+        <div class="bar">
+            <div class="bar-progress" data-target="99%">
+                <div class="bar-label">99% Satisfaction</div>
+            </div>
+        </div>
 
-<div class="container hero text-center">
-    <div class="row stats gx-4">
-        <div class="col-md-3"><strong>99%</strong> Satisfaction</div>
-        <div class="col-md-3"><strong>15,000+</strong> Advocates</div>
-        <div class="col-md-3"><strong>10,000+</strong> Clients</div>
-        <div class="col-md-3"><strong>100+</strong> Services</div>
+        <!-- Advocates Bar -->
+        <div class="bar">
+            <div class="bar-progress" data-target="15000">
+                <div class="bar-label">15,000+ Advocates</div>
+            </div>
+        </div>
+
+        <!-- Clients Bar -->
+        <div class="bar">
+            <div class="bar-progress" data-target="10000">
+                <div class="bar-label">10,000+ Clients</div>
+            </div>
+        </div>
+
+        <!-- Services Bar -->
+        <div class="bar">
+            <div class="bar-progress" data-target="100">
+                <div class="bar-label">100+ Services</div>
+            </div>
+        </div>
     </div>
 </div>
+
 
 <div class="container services my-5">
     <h2 class="text-center mb-4">Top Services</h2>
@@ -344,6 +401,23 @@ showNotification('Welcome to SpecterRoss!');
         const missionText = document.getElementById('missionText');
         missionText.classList.toggle('hidden');
     }
+    // Function to animate bars
+function animateBars() {
+    const bars = document.querySelectorAll('.bar-progress');
+    bars.forEach(bar => {
+        const target = bar.getAttribute('data-target');
+        if (target.endsWith('%')) {
+            bar.style.width = target;
+        } else {
+            bar.style.width = (parseInt(target) / 200) + '%'; // Adjust the divisor based on max value
+        }
+    });
+}
+
+// Run the animation on page load
+window.onload = function() {
+    animateBars();
+};
 </script>
 </body>
 </html>
